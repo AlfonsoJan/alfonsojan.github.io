@@ -53,6 +53,7 @@ input, button, textarea, select {
     scroll-behavior: auto !important;
   }
 }
+
 body {
   background-color: rgb(17 24 39);
   position: relative;
@@ -60,4 +61,8 @@ body {
   min-height: 100vh;
   color: white;
   font-family: 'Roboto Mono', monospace;
+}
+
+#model-succes, #model-error {
+  transform: translate(-50%, -50%);
 }
