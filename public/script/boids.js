@@ -12,7 +12,7 @@ let flockContainer = {
   }
   
   function preload() {
-    flockContainer.birdCursorImage = loadImage('public/images/bird-cursor.png');
+    flockContainer.birdCursorImage = loadImage('../public/images/bird-cursor.png');
   }
     
   class Boid {
