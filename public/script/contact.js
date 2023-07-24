@@ -38,9 +38,6 @@ let submitEmailContainer = {
     message: document.getElementById("message"),
     succsess: false,
     errors: false,
-    showToast() {
-        console.log(this.succsess, this.errors)
-    },
     submitEmail(e) {
         e.preventDefault();
         pageHiders.buttonLoader();
@@ -65,11 +62,13 @@ let submitEmailContainer = {
         })
         .finally(() => {
             pageHiders.buttonLoaderRemover();
-            this.email.value = '',
-            this.subject.value = '',
-            this.message.value = '',
-            this.name.value =  '';
-            if (this.succsess) pageHiders.showSucces();
+            if (this.succsess) {
+                pageHiders.showSucces();
+                this.email.value = '',
+                this.subject.value = '',
+                this.message.value = '',
+                this.name.value =  '';
+            }
             if (this.errors) pageHiders.showError();
         })
     }
