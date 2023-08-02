@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../../public/script/tailwind.js"></script>
     <script src="../../public/script/flowbite.min.js"></script>
+    <script src="../../public/script/plotly-2.24.1.min.js" charset="utf-8"></script>
     <title>Fasta Reader</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-hamburger">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0  md:bg-gray-900 border-gray-700">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg text-sm md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-gray-900 border-gray-700">
                     <li><a href="/" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-white hover:bg-[#FFA151] bg-[#FF7300]" aria-current="page">Home</a></li>
                     <li><a href="/cv" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-white hover:bg-[#FFA151] bg-[#FF7300]" aria-current="page">CV</a></li>
                     <li><a href="/projects" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-white hover:bg-[#FFA151] bg-[#FF7300]" aria-current="page">Project</a></li>
@@ -34,7 +35,27 @@
     </nav>
     <div class="container mx-auto my-10 px-1">
         <div class="p-6 mx-auto">
-            Fasta Reader
+            <h2 class="text-4xl tracking-tight font-extrabold text-center text-white">Fasta Reader</h2>
+            <h5 class="mb-4 text-3xl font-medium text-white text-center">Info</h5>
+        </div>
+        <div class="grid grid-cols-3 gap-x-4 md:w-7/12 mx-auto px-1 gap-y-10">
+            <div class="col-span-3">
+                <label class="block mb-2 text-sm font-medium text-white" for="file_input">Upload file</label>
+                <input class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400" accept=".fasta,.fa,.gb" aria-describedby="file_input_help" id="file_input" type="file">
+                <p class="mt-1 text-sm text-gray-300" id="file_input_help">FASTA or GB.</p>
+            </div>
+            <div class="col-span-3">
+                <button type="button" id="submitButton" class="hover:cursor-pointer text-white hover:bg-[#FFA151] bg-[#FF7300] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center">
+                    Submit
+                </button>
+            </div>
+            <div class="col-span-3">
+                <div id="tester"></div>
+            </div>
+            <div class="col-span-3 grid grid-cols-8 overflow-y-auto my-2" id="ORFS">
+                <div class="col-span-1" id="ORFS-name"></div>
+                <div class="col-span-7 overflow-y-auto" id="ORFS-seq"></div>
+            </div>
         </div>
     </div>
 
@@ -55,5 +76,6 @@
             <span class="block text-sm sm:text-center text-gray-400"><a href="/" class="hover:underline">Jan Alfonso Busker</a> © 2023 All Rights Reserved.</span>
         </div>
     </footer>
+    <script src="../../public/script/fasta-reader.js"></script>
 </body>
 </html>
