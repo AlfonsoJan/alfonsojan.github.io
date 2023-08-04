@@ -41,7 +41,7 @@
             <h2 class="text-4xl tracking-tight font-extrabold text-center text-white">Fasta Reader</h2>
             <h5 class="mb-4 text-3xl font-medium text-white text-center">Info</h5>
         </div>
-        <div class="grid grid-cols-3 gap-x-4 md:w-7/12 mx-auto px-1 gap-y-10">
+        <div class="grid grid-cols-3 gap-x-4 md:w-7/12 mx-auto px-1 gap-y-10" id="main-body">
             <div class="col-span-3">
                 <label class="block mb-2 text-sm font-medium text-white" for="file_input">Upload file</label>
                 <input class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400" accept=".fasta,.fa,.gb" aria-describedby="file_input_help" id="file_input" type="file">
@@ -52,13 +52,16 @@
                     Submit
                 </button>
             </div>
-            <div class="col-span-3">
-                <div id="tester"></div>
-            </div>
-            <div class="col-span-3 grid grid-cols-8 overflow-y-auto my-2" id="ORFS">
+            <!-- <div class="col-span-3 rounded-lg bg-gray-800 grid grid-cols-8 overflow-y-auto my-2 gap-x-10 px-1" id="ORFS">
                 <div class="col-span-1" id="ORFS-name"></div>
                 <div class="col-span-7 overflow-y-auto" id="ORFS-seq"></div>
             </div>
+            <div class="col-span-3">
+                <div id="pie-plot" class="plot-div"></div>
+            </div>
+            <div class="col-span-3">
+                <div id="gc-plot" class="plot-div"></div>
+            </div> -->
         </div>
     </div>
 
