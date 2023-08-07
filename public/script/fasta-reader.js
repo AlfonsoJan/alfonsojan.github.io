@@ -265,6 +265,7 @@ let sequenceContainer = {
             return;
         }
         sequence.getStats()
+        pageFunctions.addPlots(sequence)
         pageFunctions.hideLoader()
     },
 }
@@ -280,7 +281,6 @@ let pageFunctions = {
         pageFunctions.run()
     },
     addPlots(sequence) {
-        // ADD TABS
         document.getElementById("main-body").appendChild(pageFunctions.htmlToElement(`<div class="col-span-3 rounded-lg bg-gray-800 grid grid-cols-8 overflow-y-auto my-2 gap-x-10 px-1" id="ORFS">
         <div class="col-span-1" id="ORFS-name"></div>
         <div class="col-span-7 overflow-y-auto" id="ORFS-seq"></div>
