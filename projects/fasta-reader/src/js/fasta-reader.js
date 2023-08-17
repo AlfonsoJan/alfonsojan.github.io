@@ -1,30 +1,3 @@
-
-//     drawPlot() {
-//         this.data = [{
-//             type: "pie",
-//             values: Object.keys(this.countData).map(key => this.countData[key]),
-//             labels: Object.keys(this.countData).map(key => key),
-//             textinfo: "label+percent",
-//             textposition: "outside",
-//             automargin: true,
-//             marker: {colors: ['gold', 'mediumturquoise', 'darkorange', 'lightgreen'], line: {color: '#000000', width: 2}},
-//             textfont: { color: "white", size: 18 },
-//         }]
-//         Plotly.newPlot("tester", this.data, this.layout, this.config);
-
-//         document.getElementById("ORFS").insertBefore(pageFunctions.htmlToElement(`<div class="col-span-8"><p class="text-center font-thin"><span style="color: rgb(0,255,0);">Startcodon</span> <span style="color: rgb(247, 25, 25);">Stopcodon</span></p></div>`), document.getElementById("ORFS").firstChild);
-//         document.getElementById("ORFS-seq").appendChild(pageFunctions.htmlToElement(`<p class="pt-2">${this.seq}</p>`))
-//         document.getElementById("ORFS-name").appendChild(pageFunctions.htmlToElement(`<p class="pt-2">Sequence</p>`))
-//         for (const ORF in this.ORFS) {
-//             const highlightedSequence = this.ORFS[ORF].sequence.replace(this.startCodonRegex,'<span style="color: green;">$&</span>').replace(this.stopCodonRegex, '<span style="color: red;">$&</span>')
-//             document.getElementById("ORFS-seq").appendChild(pageFunctions.htmlToElement(`<p class="pt-2">${highlightedSequence}</p>`))
-//             document.getElementById("ORFS-name").appendChild(pageFunctions.htmlToElement(`<p class="pt-2">${this.ORFS[ORF].name}</p>`))
-//         }
-//     },
-// }
-
-
-
 class Sequence {
     gcContent = [];
     countData = {};
