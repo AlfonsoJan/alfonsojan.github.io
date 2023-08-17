@@ -18,6 +18,11 @@ export default class Renderer {
         this.scene.background = new THREE.Color( 0x000000 );
         this.getWindowSize();
         this.boidsController = new BoidsController(this.boundary[0], this.boundary[1], this.boundary[2], 1);
+        this.mouse = new THREE.Vector3();
+        this.vec = new THREE.Vector3();
+        this.raycaster = new THREE.Raycaster();
+        this.DEBUG = 0;
+        this.mouseMove = false;
     }
 
     init() {
@@ -37,7 +42,28 @@ export default class Renderer {
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
-        
+
+        this.renderer.domElement.addEventListener('mousemove', this.onMouseMove.bind(this));
+        this.renderer.domElement.addEventListener('mouseout', this.onMouseOut.bind(this));
+    }
+
+    onMouseOut(event) {
+        this.mouse.x = -2;
+        this.mouse.y = -2;
+    }
+
+    onMouseMove(event) {
+        // https://stackoverflow.com/questions/13055214/mouse-canvas-x-y-to-three-js-world-x-y-z
+        this.vec.set(
+            ( event.clientX / window.innerWidth ) * 2 - 1,
+            - ( event.clientY / window.innerHeight ) * 2 + 1,
+            200 );
+        this.vec.unproject( this.camera );
+
+        this.vec.sub( this.camera.position ).normalize();
+        let distance = ( this.boundary[2] * 0.5 - this.camera.position.z ) / this.vec.z;
+
+        this.mouse.copy( this.camera.position ).add( this.vec.multiplyScalar( distance ) );
     }
 
     createGridVisual(subdivisionCount) {

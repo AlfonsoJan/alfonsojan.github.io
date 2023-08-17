@@ -20,7 +20,7 @@ class App {
 
     render() {
         window.requestAnimationFrame(this.render.bind(this));
-        this.boidsController.iterate();
+        this.boidsController.iterate(this.renderer.mouse, this.renderer.camera);
         this.renderer.render();
     }
 }

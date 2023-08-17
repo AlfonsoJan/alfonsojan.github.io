@@ -22,6 +22,8 @@ export default class ControlHelper {
         
         this.boidsButton = gui.add(this, 'addBoids');
         this.obstacleButton = gui.add(this, 'addObstacles');
+
+        gui.add(this.boidsController, 'AvoidMouseImpl').name('Avoid Mouse');
         
         this.updateButtonLabels();
     }

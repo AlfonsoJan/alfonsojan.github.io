@@ -9,3 +9,7 @@ body {
     right: 0;
     margin: auto;
 }
+
+#bird {
+    cursor: url('../images/bird-cursor.png'), default;
+}

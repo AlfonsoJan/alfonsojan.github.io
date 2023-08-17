@@ -32,6 +32,22 @@ export default class BoidsController {
         this.cohesionRadius = 100;
         this.separationRadius = 100;
         this.obstacleRadius = 100;
+
+        this.camera = undefined;
+        this.mouse = undefined;
+        this.raycaster = undefined;
+        this.avoidMouse = false;
+        this.bird = './src/images/bird-cursor.png';
+        this.birdBool = false;
+    }
+
+    AvoidMouseImpl() {
+        //document.style.cursor.id = "a";
+        var elementToChange = document.getElementsByTagName("body")[0];
+        console.log(elementToChange)
+        elementToChange.id = `bird`;
+        this.birdBool = !this.birdBool
+        //document.body.style.cursor = `url(${this.bird})`
     }
 
     /**
@@ -126,7 +142,9 @@ export default class BoidsController {
      * @param {Number} start start index for calculation
      * @param {Number} end end index for calculation
      */
-    iterate(start=0, end=this.flockEntities.length) {
+    iterate(mouse=null, camera=null, start=0, end=this.flockEntities.length) {
+        let mouseOnScreen = !(mouse.x === -2 && mouse.y === -2);
+
         for(let i=start; i<end; i++) {
             const entity = this.flockEntities[i];
             const aligmentVel = this.computeAlignment(entity);
@@ -141,8 +159,23 @@ export default class BoidsController {
                         50*this.separationWeight*sepVel[1] + 100*obsVel[1];
             const vz = this.aligmentWeight*aligmentVel[2] + this.cohesionWeight*cohVel[2] +
                         50*this.separationWeight*sepVel[2] + 100*obsVel[2];
-
-            entity.addVelocity(vx, vy, vz);
+            let v1 = new THREE.Vector2(mouse.x, mouse.y);
+            let v2 = new THREE.Vector2(entity.x, entity.y);
+            let distance = v1.distanceTo(v2)
+            if (mouseOnScreen && this.avoidMouse && distance < 200) {
+                const scatterFactor = 100;
+                // entity.addVelocity(-this.aligmentWeight * scatterFactor * aligmentVel[0], -this.aligmentWeight * scatterFactor * aligmentVel[1], -this.aligmentWeight * scatterFactor * aligmentVel[2]);
+                // entity.addVelocity(-this.cohesionWeight * scatterFactor * cohVel[0], -this.cohesionWeight * scatterFactor * cohVel[1], -this.cohesionWeight * scatterFactor * cohVel[2]);
+                // entity.addVelocity(-50 * this.separationWeight * scatterFactor * sepVel[0], -50 * this.separationWeight * scatterFactor * sepVel[1], -50 * this.separationWeight * scatterFactor * sepVel[2]);
+                entity.addVelocity(this.aligmentWeight * scatterFactor * aligmentVel[0], this.aligmentWeight * scatterFactor * aligmentVel[1], this.aligmentWeight * scatterFactor * aligmentVel[2]);
+                entity.addVelocity(this.cohesionWeight * scatterFactor * cohVel[0], this.cohesionWeight * scatterFactor * cohVel[1], this.cohesionWeight * scatterFactor * cohVel[2]);
+                entity.addVelocity(50 * this.separationWeight * scatterFactor * sepVel[0], 50 * this.separationWeight * scatterFactor * sepVel[1], 50 * this.separationWeight * scatterFactor * sepVel[2]);
+                //entity.addVelocity(vx, vy, vz);
+                //entity.addVelocity(vx, vy, vz); 
+                
+            } else {
+                entity.addVelocity(vx, vy, vz);
+            }
             entity.move(this.maxEntitySpeed, this.boundaryX, this.boundaryY, this.boundaryZ);
         }
     }
