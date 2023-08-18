@@ -19,10 +19,12 @@ export default class Renderer {
         this.getWindowSize();
         this.boidsController = new BoidsController(this.boundary[0], this.boundary[1], this.boundary[2], 1);
         this.mouse = new THREE.Vector3();
+        this.mouseBird = new THREE.Vector2();
         this.vec = new THREE.Vector3();
         this.raycaster = new THREE.Raycaster();
         this.DEBUG = 0;
         this.mouseMove = false;
+        this.avoidMouse = false;
     }
 
     init() {
@@ -45,6 +47,9 @@ export default class Renderer {
 
         this.renderer.domElement.addEventListener('mousemove', this.onMouseMove.bind(this));
         this.renderer.domElement.addEventListener('mouseout', this.onMouseOut.bind(this));
+
+        this.cursor = document.querySelector('.custom-cursor');
+        this.cursor.style.display = 'none'
     }
 
     onMouseOut(event) {
@@ -64,6 +69,16 @@ export default class Renderer {
         let distance = ( this.boundary[2] * 0.5 - this.camera.position.z ) / this.vec.z;
 
         this.mouse.copy( this.camera.position ).add( this.vec.multiplyScalar( distance ) );
+        
+        if (this.avoidMouse) {
+            this.cursor.style.display = ''
+            this.cursor.style.left = `${Math.min((window.innerWidth - 20), event.clientX)}px`;
+            this.cursor.style.top = `${Math.min((window.innerHeight - 20), event.clientY)}px`;
+            document.body.style.cursor = 'none'
+        } else {
+            this.cursor.style.display = 'none'
+            document.body.style.cursor = ''
+        }
     }
 
     createGridVisual(subdivisionCount) {

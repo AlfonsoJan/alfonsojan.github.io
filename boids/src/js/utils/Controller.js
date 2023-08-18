@@ -8,7 +8,7 @@ export default class ControlHelper {
     constructor(boidsController, renderer) {
         this.boidsController = boidsController;
         this.renderer = renderer;
-        this.maxBoids = 500;
+        this.maxBoids = 300;
         this.maxObstacles = 30;
     }
 
@@ -19,13 +19,15 @@ export default class ControlHelper {
         gui.add(this.boidsController, 'cohesionWeight',0,5).name('Cohesion');
         gui.add(this.boidsController, 'separationWeight',0,5).name('Separation');
         gui.add(this.boidsController, 'maxEntitySpeed',1,10).name('Max Speed');
+        gui.add(this.boidsController, 'scatterFactor', 100, 300).name('Scatter Force');
         
         this.boidsButton = gui.add(this, 'addBoids');
         this.obstacleButton = gui.add(this, 'addObstacles');
 
-        gui.add(this.boidsController, 'AvoidMouseImpl').name('Avoid Mouse');
+        gui.add(this.renderer, 'avoidMouse').name('Avoid Mouse');
         
         this.updateButtonLabels();
+
     }
 
     addBoids(count=10) {

@@ -32,6 +32,9 @@ export default class BoidsController {
         this.cohesionRadius = 100;
         this.separationRadius = 100;
         this.obstacleRadius = 100;
+        this.mouseRadius = 200;
+
+        this.scatterFactor = 200;
 
         this.camera = undefined;
         this.mouse = undefined;
@@ -39,15 +42,6 @@ export default class BoidsController {
         this.avoidMouse = false;
         this.bird = './src/images/bird-cursor.png';
         this.birdBool = false;
-    }
-
-    AvoidMouseImpl() {
-        //document.style.cursor.id = "a";
-        var elementToChange = document.getElementsByTagName("body")[0];
-        console.log(elementToChange)
-        elementToChange.id = `bird`;
-        this.birdBool = !this.birdBool
-        //document.body.style.cursor = `url(${this.bird})`
     }
 
     /**
@@ -142,7 +136,7 @@ export default class BoidsController {
      * @param {Number} start start index for calculation
      * @param {Number} end end index for calculation
      */
-    iterate(mouse=null, camera=null, start=0, end=this.flockEntities.length) {
+    iterate(mouse=null, avoidMouse=false, start=0, end=this.flockEntities.length) {
         let mouseOnScreen = !(mouse.x === -2 && mouse.y === -2);
 
         for(let i=start; i<end; i++) {
@@ -151,31 +145,25 @@ export default class BoidsController {
             const cohVel = this.computeCohesion(entity);
             const sepVel = this.computeSeparation(entity);
             const obsVel = this.computeObstacles(entity);
-
-            // add components
-            const vx = this.aligmentWeight*aligmentVel[0] + this.cohesionWeight*cohVel[0] +
-                        50*this.separationWeight*sepVel[0] + 100*obsVel[0];
-            const vy = this.aligmentWeight*aligmentVel[1] + this.cohesionWeight*cohVel[1] +
-                        50*this.separationWeight*sepVel[1] + 100*obsVel[1];
-            const vz = this.aligmentWeight*aligmentVel[2] + this.cohesionWeight*cohVel[2] +
-                        50*this.separationWeight*sepVel[2] + 100*obsVel[2];
-            let v1 = new THREE.Vector2(mouse.x, mouse.y);
-            let v2 = new THREE.Vector2(entity.x, entity.y);
-            let distance = v1.distanceTo(v2)
-            if (mouseOnScreen && this.avoidMouse && distance < 200) {
-                const scatterFactor = 100;
-                // entity.addVelocity(-this.aligmentWeight * scatterFactor * aligmentVel[0], -this.aligmentWeight * scatterFactor * aligmentVel[1], -this.aligmentWeight * scatterFactor * aligmentVel[2]);
-                // entity.addVelocity(-this.cohesionWeight * scatterFactor * cohVel[0], -this.cohesionWeight * scatterFactor * cohVel[1], -this.cohesionWeight * scatterFactor * cohVel[2]);
-                // entity.addVelocity(-50 * this.separationWeight * scatterFactor * sepVel[0], -50 * this.separationWeight * scatterFactor * sepVel[1], -50 * this.separationWeight * scatterFactor * sepVel[2]);
-                entity.addVelocity(this.aligmentWeight * scatterFactor * aligmentVel[0], this.aligmentWeight * scatterFactor * aligmentVel[1], this.aligmentWeight * scatterFactor * aligmentVel[2]);
-                entity.addVelocity(this.cohesionWeight * scatterFactor * cohVel[0], this.cohesionWeight * scatterFactor * cohVel[1], this.cohesionWeight * scatterFactor * cohVel[2]);
-                entity.addVelocity(50 * this.separationWeight * scatterFactor * sepVel[0], 50 * this.separationWeight * scatterFactor * sepVel[1], 50 * this.separationWeight * scatterFactor * sepVel[2]);
-                //entity.addVelocity(vx, vy, vz);
-                //entity.addVelocity(vx, vy, vz); 
+            
+            const mouseVector = new THREE.Vector2(mouse.x, mouse.y);
+            const entityVector2d = new THREE.Vector2(entity.x, entity.y);
+            const distance = mouseVector.distanceTo(entityVector2d)
+            if (mouseOnScreen && avoidMouse && distance <= this.mouseRadius) {
+                entity.addVelocity(this.aligmentWeight * this.scatterFactor * aligmentVel[0], this.aligmentWeight * this.scatterFactor * aligmentVel[1], this.aligmentWeight * this.scatterFactor * aligmentVel[2]);
+                entity.addVelocity(this.cohesionWeight * this.scatterFactor * cohVel[0], this.cohesionWeight * this.scatterFactor * cohVel[1], this.cohesionWeight * this.scatterFactor * cohVel[2]);
+                entity.addVelocity(50 * this.separationWeight * this.scatterFactor * sepVel[0], 50 * this.separationWeight * this.scatterFactor * sepVel[1], 50 * this.separationWeight * this.scatterFactor * sepVel[2]);
                 
             } else {
+                const vx = this.aligmentWeight*aligmentVel[0] + this.cohesionWeight*cohVel[0] +
+                        50*this.separationWeight*sepVel[0] + 100*obsVel[0];
+                const vy = this.aligmentWeight*aligmentVel[1] + this.cohesionWeight*cohVel[1] +
+                            50*this.separationWeight*sepVel[1] + 100*obsVel[1];
+                const vz = this.aligmentWeight*aligmentVel[2] + this.cohesionWeight*cohVel[2] +
+                            50*this.separationWeight*sepVel[2] + 100*obsVel[2];
                 entity.addVelocity(vx, vy, vz);
             }
+            
             entity.move(this.maxEntitySpeed, this.boundaryX, this.boundaryY, this.boundaryZ);
         }
     }

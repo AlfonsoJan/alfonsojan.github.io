@@ -13,3 +13,12 @@ body {
 #bird {
     cursor: url('../images/bird-cursor.png'), default;
 }
+
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/bird-cursor.png');
+    background-size: cover;
+    position: absolute;
+    pointer-events: none;
+}
