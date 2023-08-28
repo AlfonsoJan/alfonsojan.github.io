@@ -32,7 +32,7 @@ export default class Renderer {
         let line = this.wireframe.render();
         this.scene.add(line);
 
-        this.entityGeometry = new THREE.ConeGeometry(4, 18, 8);
+        this.entityGeometry = new THREE.ConeGeometry(3, 13, 6);
         this.entityMaterial = new THREE.MeshBasicMaterial({ color: 0xFFA500});
 
         this.obstacleGeometry = new THREE.SphereGeometry( 50, 15, 15 );
@@ -67,9 +67,6 @@ export default class Renderer {
 
         this.vec.sub(this.camera.position).normalize();
         let distance = (this.boundary[2] * 0.5 - this.camera.position.z) / this.vec.z;
-        
-        //const sensitivity = 0.1;
-        //distance *= sensitivity;
 
         this.mouse.copy(this.camera.position).add(this.vec.multiplyScalar(distance));
         
