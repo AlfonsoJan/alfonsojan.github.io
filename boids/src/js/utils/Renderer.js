@@ -17,12 +17,11 @@ export default class Renderer {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color( 0x000000 );
         this.getWindowSize();
-        this.boidsController = new BoidsController(this.boundary[0], this.boundary[1], this.boundary[2], 1);
+        this.boidsController = new BoidsController(this.boundary, 1);
         this.mouse = new THREE.Vector3();
         this.mouseBird = new THREE.Vector2();
         this.vec = new THREE.Vector3();
         this.raycaster = new THREE.Raycaster();
-        this.DEBUG = 0;
         this.mouseMove = false;
         this.avoidMouse = false;
     }
@@ -62,13 +61,17 @@ export default class Renderer {
         this.vec.set(
             ( event.clientX / window.innerWidth ) * 2 - 1,
             - ( event.clientY / window.innerHeight ) * 2 + 1,
-            200 );
-        this.vec.unproject( this.camera );
+            200
+        );
+        this.vec.unproject(this.camera);
 
-        this.vec.sub( this.camera.position ).normalize();
-        let distance = ( this.boundary[2] * 0.5 - this.camera.position.z ) / this.vec.z;
+        this.vec.sub(this.camera.position).normalize();
+        let distance = (this.boundary[2] * 0.5 - this.camera.position.z) / this.vec.z;
+        
+        //const sensitivity = 0.1;
+        //distance *= sensitivity;
 
-        this.mouse.copy( this.camera.position ).add( this.vec.multiplyScalar( distance ) );
+        this.mouse.copy(this.camera.position).add(this.vec.multiplyScalar(distance));
         
         if (this.avoidMouse) {
             this.cursor.style.display = ''

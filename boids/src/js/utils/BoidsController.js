@@ -2,25 +2,15 @@ import Entity from './Entity.js';
 import Grid from './Grid.js'
 
 export default class BoidsController {
-    /**
-     * Constructor for the BoidsController
-     * @param {Number} boundaryX world size in x axis
-     * @param {Number} boundaryY world size in y axis
-     * @param {Number} boundaryZ world size in z axis
-     * @param {Number} subDivisionCount subdivision count defines the grid size. 
-     * If it is given 10, world will be splitted into 10*10*10 cubes for spatial partitioning.
-     */
-    constructor(boundaryX = 500, boundaryY = 500, boundaryZ = 500, subDivisionCount=1) {
-        const maxSize = Math.max(boundaryX, boundaryY, boundaryZ);
+    constructor(boundary=[500,500,500], subDivisionCount=1) {
+        const maxSize = Math.max(...boundary);
         this.grid = new Grid(maxSize, maxSize/subDivisionCount);
         this.subDivisionCount = subDivisionCount;
 
         this.flockEntities = [];
         this.obstacleEntities = [];
 
-        this.boundaryX = boundaryX;
-        this.boundaryY = boundaryY;
-        this.boundaryZ = boundaryZ;
+        this.boundary = boundary
 
         this.aligmentWeight = 2.0;
         this.cohesionWeight = 4;
@@ -35,111 +25,34 @@ export default class BoidsController {
         this.mouseRadius = 200;
 
         this.scatterFactor = 200;
-
-        this.camera = undefined;
-        this.mouse = undefined;
-        this.raycaster = undefined;
-        this.avoidMouse = false;
-        this.bird = './src/images/bird-cursor.png';
-        this.birdBool = false;
     }
 
-    /**
-     * Adds flock entity to boids container
-     * @param {Entity} entity 
-     */
     addFlockEntity(entity) {
         this.grid.addEntity(entity);
         this.flockEntities.push(entity);
     }
 
-    /**
-     * Returns flock entities
-     * @returns {Array} flock entities
-     */
     getFlockEntities() {
         return this.flockEntities;
     }
 
-    /**
-     * Adds obstacle entity to boids controller
-     * @param {Entity} entity 
-     */
     addObstacleEntity(entity) {
         this.grid.addEntity(entity);
         this.obstacleEntities.push(entity);
     }
 
-    /**
-     * Returns obstacle entities
-     * @returns {Array} obstacle entities
-     */
     getObstacleEntities() {
         return this.obstacleEntities;
     }
 
-    /**
-     * Returns world boundary
-     * @returns {Array} boundary vector
-     */
     getBoundary() {
-        return [this.boundaryX, this.boundaryY, this.boundaryZ];
+        return this.boundary;
     }
 
-    /**
-     * Sets max speed for flock entities.
-     * @param {Number} s 
-     */
-    setMaxSpeed(s) {
-        this.maxEntitySpeed = s;
-    }
-
-    /**
-     * Sets aligment weight. This changes how much flock entities are effected by each others alignment
-     * @param {Number} w 
-     */
-    setAligmentWeight(w) {
-        this.aligmentWeight = w;
-    }
-
-    /**
-     * Sets cohesion weight. This changes how much flock entities are inclined to stick together
-     * @param {Number} w 
-     */
-    setCohesionWeight(w) {
-        this.cohesionWeight = w;
-    }
-
-    /**
-     * Sets separation weight. This changes how much flock entities are inclined to separate from each together
-     * @param {Number} w 
-     */
-    setSeparationWeight(w) {
-        this.separationWeight = w;
-    }
-
-    /**
-     * Sets world boundary
-     * @param {Number} x 
-     * @param {Number} y 
-     * @param {Number} z 
-     */
-    setBoundary(x, y, z) {
-        this.boundaryX = x;
-        this.boundaryY = y;
-        this.boundaryZ = z;
-    }
-
-    /**
-     * iterate calculates the new position for flock entities.
-     * start and end indices are used for parallelization of this calculation
-     * @param {Number} start start index for calculation
-     * @param {Number} end end index for calculation
-     */
-    iterate(mouse=null, avoidMouse=false, start=0, end=this.flockEntities.length) {
+    iterate(mouse=null, avoidMouse=false) {
         let mouseOnScreen = !(mouse.x === -2 && mouse.y === -2);
 
-        for(let i=start; i<end; i++) {
+        for(let i=0; i < this.flockEntities.length; i++) {
             const entity = this.flockEntities[i];
             const aligmentVel = this.computeAlignment(entity);
             const cohVel = this.computeCohesion(entity);
@@ -164,15 +77,10 @@ export default class BoidsController {
                 entity.addVelocity(vx, vy, vz);
             }
             
-            entity.move(this.maxEntitySpeed, this.boundaryX, this.boundaryY, this.boundaryZ);
+            entity.move(this.maxEntitySpeed, ...this.boundary);
         }
     }
 
-    /**
-     * Computes alignment vector for the given entity
-     * @param {Entity} entity 
-     * @returns {Array} alignment vector
-     */
     computeAlignment(entity) {
         let aligmentX = 0;
         let aligmentY = 0;
@@ -206,11 +114,6 @@ export default class BoidsController {
         return [aligmentX, aligmentY, aligmentZ];
     }
 
-    /**
-     * Computes cohesion vector for the given entity
-     * @param {Entity} entity 
-     * @returns {Array} cohesion vector
-     */
     computeCohesion(entity) {
         let cohX = 0;
         let cohY = 0;
@@ -249,11 +152,6 @@ export default class BoidsController {
         return [cohX, cohY, cohZ];
     }
 
-    /**
-     * Computes separation vector for the given entity
-     * @param {Entity} entity 
-     * @returns {Array} separation vector
-     */
     computeSeparation(entity) {
         let sepX = 0;
         let sepY = 0;
@@ -282,11 +180,6 @@ export default class BoidsController {
         return [sepX, sepY, sepZ];
     }
 
-    /**
-     * Computes obstacle avoidance vector for the given entity
-     * @param {Entity} entity 
-     * @returns {Array} obstacle avoidance vector
-     */
     computeObstacles(entity) {
         let avoidX = 0;
         let avoidY = 0;
@@ -308,9 +201,9 @@ export default class BoidsController {
 
         // avoid boundary limits
         const boundaryObstacleRadius = this.obstacleRadius/4;
-        const distX = this.boundaryX - entity.x;
-        const distY = this.boundaryY - entity.y;
-        const distZ = this.boundaryZ - entity.z;
+        const distX = this.boundary[0] - entity.x;
+        const distY = this.boundary[1] - entity.y;
+        const distZ = this.boundary[2] - entity.z;
         if(entity.x < boundaryObstacleRadius && Math.abs(entity.x) > 0) {
             avoidX += 1/entity.x;
         } else if(distX < boundaryObstacleRadius && distX > 0) {
@@ -328,101 +221,5 @@ export default class BoidsController {
         }
 
         return [avoidX, avoidY, avoidZ];
-    }
-
-    /**
-     * This methods serializes the whole boids controller with entities and
-     * returns as a simple object.
-     * @returns {Object} serialized BoidsController data
-     */
-    serialize() {
-        const flockEntities = [];
-        const obstacleEntities = [];
-        this.flockEntities.forEach(entity => {
-            flockEntities.push(entity.serialize());
-        });
-
-        this.obstacleEntities.forEach(entity => {
-            obstacleEntities.push(entity.serialize());
-        });
-
-        return {
-            subDivisionCount: this.subDivisionCount,
-            boundaryX: this.boundaryX,
-            boundaryY: this.boundaryY,
-            boundaryZ: this.boundaryZ,
-            flockEntities,
-            obstacleEntities,
-            aligmentWeight: this.aligmentWeight,
-            cohesionWeight: this.cohesionWeight,
-            separationWeight: this.separationWeight,
-            maxEntitySpeed: this.maxEntitySpeed,
-            aligmentRadius: this.aligmentRadius,
-            cohesionRadius: this.cohesionRadius,
-            separationRadius: this.separationRadius,
-            obstacleRadius: this.obstacleRadius
-        }
-    }
-
-    /**
-     * This methods serializes only the boids data for the given start and end indices.
-     * @param {Number} start 
-     * @param {Number} end 
-     * @returns {Object} serialized partial boids data
-     */
-    serializeBoidsData(start=0, end=this.flockEntities.length) {
-        const flockEntities = [];
-        for(let i=start; i<end; i++) {
-            flockEntities.push(this.flockEntities[i].serialize());
-        }
-        return {start, flockEntities};
-    }
-
-    /**
-     * Applies the serialized boids data.
-     * @param {Object} data 
-     */
-    applyBoidsData(data) {
-        const start = data.start;
-        const flockEntities = data.flockEntities;
-        for(let i=0; i<flockEntities.length; i++) {
-            const entity = this.flockEntities[start+i];
-            const updatedData = flockEntities[i];
-            if(entity.id == updatedData.id) {
-                entity.updateData(updatedData);
-            } else {
-                console.log("ids do not match!");
-            }
-        }
-    }
-
-    /**
-     * This static method deserializes a boids controller data
-     * and creates a new BoidsController instance.
-     * @param {Object} data 
-     * @returns {BoidsController} deserialized BoidsController instance
-     */
-    static deserialize(data) {
-        const controller = new BoidsController(data.boundaryX, data.boundaryY, data.boundaryZ, data.subDivisionCount);
-        controller.aligmentWeight = data.aligmentWeight;
-        controller.cohesionWeight = data.cohesionWeight;
-        controller.separationWeight = data.separationWeight;
-        controller.maxEntitySpeed = data.maxEntitySpeed;
-        controller.aligmentRadius = data.aligmentRadius;
-        controller.cohesionRadius = data.cohesionRadius;
-        controller.separationRadius = data.separationRadius;
-        controller.obstacleRadius = data.obstacleRadius;
-
-        data.flockEntities.forEach(entityData => {
-            const entity = Entity.deserialize(entityData);
-            controller.addFlockEntity(entity);
-        });
-
-        data.obstacleEntities.forEach(entityData => {
-            const entity = Entity.deserialize(entityData);
-            controller.addObstacleEntity(entity);
-        });
-
-        return controller;
     }
 }
