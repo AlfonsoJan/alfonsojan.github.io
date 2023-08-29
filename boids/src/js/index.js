@@ -1,8 +1,11 @@
 import Renderer from "./utils/Renderer.js";
-import Controller from './utils/Controller.js'
 
+/**
+ * App class that calls all the necessary functions.
+ */
 class App {
     constructor() {
+        // Initial number of boids and obstacles
         this.flockEntityCount = 60;
         this.obstacleEntityCount = 0;
     }
@@ -11,10 +14,9 @@ class App {
         this.renderer = new Renderer();
         this.renderer.init();
         this.boidsController = this.renderer.boidsController,
-        this.controller = new Controller(this.boidsController, this.renderer);
-        this.controller.init();
-        this.controller.addBoids(this.flockEntityCount);
-        this.controller.addObstacles(this.obstacleEntityCount);
+        this.boidsController.addBoids(this.flockEntityCount)
+        this.boidsController.addObstacles(this.obstacleEntityCount)
+        // Request the first animation frame
         window.requestAnimationFrame(this.render.bind(this));
     }
 
