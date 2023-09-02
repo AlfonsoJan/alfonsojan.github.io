@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 import PDBAtom from "./PDBAtom.js"
 
-let atomInfo = {
+const atomInfo = {
     C: { color: 0x666666, size: 1 },
     Cr: { color: 0x00FF00, size: 1 },
     H: { color: 0xFFFFFF, size: 0.65 },
@@ -12,8 +12,25 @@ let atomInfo = {
     OH: { color: 0xFF0000, size: 1 },
     P: { color: 0xFF7F00, size: 1.25 },
     S: { color: 0x99CC33, size: 1.2 },
-    _: { color: 0x00FFFF, size: 0.5 },
-}
+    Li: { color: 0xFFA500, size: 0.75 },
+    Na: { color: 0x0000FF, size: 1.5 },
+    Mg: { color: 0x00FF00, size: 1.2 },
+    Si: { color: 0xDAA520, size: 1.1 },
+    Cl: { color: 0x00FF00, size: 1.0 },
+    K: { color: 0xFFD700, size: 1.2 },
+    Ca: { color: 0xFFA07A, size: 1.3 },
+    Fe: { color: 0xB22222, size: 1.1 },
+    Zn: { color: 0x708090, size: 1.0 },
+    Cu: { color: 0xB87333, size: 1.0 },
+    // CA: { color: 0xCCCCCC, size: 1.0 },
+    // CB: { color: 0xCCCCCC, size: 1.0 },
+    // CG: { color: 0xCCCCCC, size: 1.0 },
+    // OD1: { color: 0xCCCCCC, size: 1.0 },
+    // OD2: { color: 0xCCCCCC, size: 1.0 },
+    // H1: { color: 0xCCCCCC, size: 1.0 },
+    // H2: { color: 0xCCCCCC, size: 1.0 },
+    _: { color: 0x00FFFF, size: 0.7 },
+};
 
 export default class PDBMolecule {
     constructor(e, scene) {
@@ -96,7 +113,6 @@ export default class PDBMolecule {
     
     #renderMolecule() {
         const geometries  = [];
-
         this.atoms.forEach(atom => {
             let sphereGeometry;
             let color;
