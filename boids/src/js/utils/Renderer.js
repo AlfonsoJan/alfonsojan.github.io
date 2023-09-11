@@ -68,7 +68,7 @@ export default class Renderer {
      * Event handler for mouse movement over the renderer's DOM element.
      * @param {MouseEvent} event - The mouse event object.
      */
-    onMouseMove(event) {
+    onMouseOut(event) {
         this.mouse.x = -2;
         this.mouse.y = -2;
     }
@@ -77,7 +77,7 @@ export default class Renderer {
      * Event handler for mouse leaving the renderer's DOM element.
      * @param {MouseEvent} event - The mouse event object.
      */
-    onMouseOut(event) {
+    onMouseMove(event) {
         // https://stackoverflow.com/questions/13055214/mouse-canvas-x-y-to-three-js-world-x-y-z
         // Unproject mouse coordinates to 3D space
         this.vec.set(
