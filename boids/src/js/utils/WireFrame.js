@@ -1,3 +1,4 @@
+import * as THREE from "https://cdn.skypack.dev/three@0.131.3";
 /**
  * @module WireFrame 
  * WireFrame class that will create a boundary for the entities

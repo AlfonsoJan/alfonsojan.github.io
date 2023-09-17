@@ -1,12 +1,14 @@
+import * as THREE from "https://cdn.skypack.dev/three@0.131.3";
+
 import WireFrame from "./WireFrame.js";
 import BoidsController from "./BoidsController.js";
+import {createFishGeometry, createFishMaterial} from './Fish.js';
 
 // Function to calculate the Z-coordinate based on X and Y with a fixed ratio
 const calculateZ = (x, y) => {
     const targetX = 2000;
     const targetY = 1000;
     const targetZ = 200;
-    
     const scaleFactor = targetZ / Math.sqrt((targetX ** 2) + (targetY ** 2));
     return Math.sqrt((x ** 2) + (y ** 2)) * scaleFactor;
 }
@@ -19,7 +21,7 @@ export default class Renderer {
     /**
      * Create a new Renderer instance
      */
-    constructor() {
+    constructor(birdMesh, initAmount) {
         this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100000 );
         this.camera.position.z = 1000;
         this.scene = new THREE.Scene();
@@ -32,11 +34,25 @@ export default class Renderer {
         this.raycaster = new THREE.Raycaster();
         this.mouseMove = false;
         this.avoidMouse = false;
+        this.dier = "vis"
+
+        this.initAmount = initAmount
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.boidsController = new BoidsController(this.boundary, 1, this);
         this.boidsController.init();
+        this.birdMesh = birdMesh;
+    }
+
+
+    hello(e) {
+        this.scene.children
+        .filter((obj) => obj.isEntity)
+        .forEach(i => {
+            this.scene.remove(i)
+        })
+        this.boidsController.addBoids(this.initAmount)
     }
 
     /**
@@ -46,9 +62,15 @@ export default class Renderer {
         // Create invisible boundary
         this.wireframe = new WireFrame(this.boundary, {color: 0x000000});
         this.wireframe.render(this.scene);
+        this.color = 0xFFA500
 
-        this.entityGeometry = new THREE.ConeGeometry(3, 13, 6);
-        this.entityMaterial = new THREE.MeshBasicMaterial({ color: 0xFFA500});
+
+        this.entityGeometry = createFishGeometry();
+        this.entityMaterial = createFishMaterial(this.color);
+        let fishSize = new THREE.Box3().setFromBufferAttribute(this.entityGeometry.attributes.position);
+        this.entityMaterial.userData.uniforms.totalLength.value = fishSize.max.x;
+
+        this.fishMesh = new THREE.Mesh(this.entityGeometry, this.entityMaterial);
 
         this.obstacleGeometry = new THREE.SphereGeometry( 50, 15, 15 );
         this.obstacleMaterial = new THREE.MeshNormalMaterial();
@@ -167,13 +189,33 @@ export default class Renderer {
             const vy = entity.vy;
             const vz = entity.vz;
             let mesh = entity.mesh;
-            // EVERY FIRST TIME AND BOID IS ADDED THEN IT WILL NOT HAVE AN MESH
-            if(!mesh) {
-                mesh = new THREE.Mesh(this.entityGeometry, this.entityMaterial);
+            // // EVERY FIRST TIME AND BOID IS ADDED THEN IT WILL NOT HAVE AN MESH
+            if (!mesh) {
+                if (this.dier === 'vogel') {
+                    mesh = this.birdMesh.clone()
+                }
+                else if (this.dier === 'vis') {
+                    mesh = this.fishMesh.clone()
+                    mesh.scale.set(2, 2, 2)
+                }
+                //mesh = this.birdMesh.clone()
                 mesh.localVelocity = {x: 0, y: 0, z: 0};
+                mesh.isEntity = true;
                 this.scene.add(mesh);
                 entity.mesh = mesh;
             }
+
+            if (this.dier === 'vogel') {
+                mesh.rotateZ(THREE.Math.degToRad(-45));
+                mesh.rotateY(THREE.Math.degToRad(180));
+                mesh.rotateX(THREE.Math.degToRad(90));
+            }
+            else if (this.dier === 'vis') {
+                mesh.rotateZ(THREE.Math.degToRad(45));
+                mesh.rotateY(THREE.Math.degToRad(90));
+                mesh.rotateX(THREE.Math.degToRad(90));
+            }
+
             // Apply asymptotic smoothing
             mesh.position.x = 0.9 * mesh.position.x + 0.1 * x;
             mesh.position.y = 0.9 * mesh.position.y + 0.1 * y;
@@ -181,14 +223,11 @@ export default class Renderer {
             mesh.localVelocity.x = 0.9 * mesh.localVelocity.x + 0.1 * vx;
             mesh.localVelocity.y = 0.9 * mesh.localVelocity.y + 0.1 * vy;
             mesh.localVelocity.z = 0.9 * mesh.localVelocity.z + 0.1 * vz;
-
             mesh.lookAt(
                 mesh.position.x + mesh.localVelocity.x,
                 mesh.position.y + mesh.localVelocity.y,
                 mesh.position.z + mesh.localVelocity.z
             );
-            // We need to rotate the cone. So that the point points to the correct heading
-            mesh.rotateX(THREE.Math.degToRad(90));
         });
 
         const obstacles = this.boidsController.getObstacleEntities();

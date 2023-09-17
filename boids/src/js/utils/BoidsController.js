@@ -1,3 +1,4 @@
+import * as THREE from "https://cdn.skypack.dev/three@0.131.3";
 import Entity from './Entity.js';
 import Grid from './Grid.js'
 
@@ -39,8 +40,8 @@ export default class BoidsController {
 
         this.scatterFactor = 200;
         
-        this.maxBoids = 300;
-        this.maxObstacles = 30;
+        this.maxBoids = 200;
+        this.maxObstacles = 20;
     }
     /**
      * Initialize the graphical user interface (GUI) and its controls.
@@ -53,6 +54,7 @@ export default class BoidsController {
         gui.add(this, 'separationWeight', 0, 5).name('Separation');
         gui.add(this, 'maxEntitySpeed', 1, 10).name('Max Speed');
         gui.add(this, 'scatterFactor', 100, 300).name('Scatter Force');
+        gui.add(this.renderer, 'dier', ['vis', 'vogel']).onChange(this.renderer.hello.bind(this.renderer)).name('Dier');
         this.boidsButton = gui.add(this, 'addBoids');
         this.obstacleButton = gui.add(this, 'addObstacles');
         gui.add(this.renderer, 'avoidMouse').name('Avoid Mouse');
