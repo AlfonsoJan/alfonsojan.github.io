@@ -54,7 +54,7 @@ export default class BoidsController {
         gui.add(this, 'separationWeight', 0, 5).name('Separation');
         gui.add(this, 'maxEntitySpeed', 1, 10).name('Max Speed');
         gui.add(this, 'scatterFactor', 100, 300).name('Scatter Force');
-        gui.add(this.renderer, 'dier', ['vis', 'vogel']).onChange(this.renderer.hello.bind(this.renderer)).name('Dier');
+        //gui.add(this.renderer, 'dier', ['vis', 'cone']).onChange(this.renderer.removeBoidsScene.bind(this.renderer)).name('Dier');
         this.boidsButton = gui.add(this, 'addBoids');
         this.obstacleButton = gui.add(this, 'addObstacles');
         gui.add(this.renderer, 'avoidMouse').name('Avoid Mouse');

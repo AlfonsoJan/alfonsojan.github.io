@@ -1,20 +1,19 @@
 import Renderer from "./utils/Renderer.js";
-import * as THREE from "https://cdn.skypack.dev/three@0.131.3";
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 /**
  * App class that calls all the necessary functions.
  */
 class App {
-    constructor(birdMesh) {
+    constructor() {
         // Initial number of boids and obstacles
         this.flockEntityCount = 60;
         this.obstacleEntityCount = 0;
-        this.birdMesh = birdMesh;
+        this.color = 0xFFA509;
+        this.scale = 1.5
     }
 
     init() {
-        this.renderer = new Renderer(this.birdMesh, this.flockEntityCount);
+        this.renderer = new Renderer(this.flockEntityCount, this.color, this.scale);
         this.renderer.init();
         this.boidsController = this.renderer.boidsController,
         this.boidsController.addBoids(this.flockEntityCount)
@@ -31,16 +30,6 @@ class App {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const loader = new GLTFLoader();
-    loader.load("./src/images/bird.gltf", (gltf) => {
-        
-        const mesh = gltf.scene;
-        const scale = 4;
-        mesh.scale.set(scale, scale, scale);
-        mesh.traverse((child) => {
-            if (child.isMesh) { child.material = new THREE.MeshBasicMaterial({color: 0xFFA500}) }
-        })
-        let app = new App(mesh)
-        app.init()
-    })
+    let app = new App()
+    app.init()
 });

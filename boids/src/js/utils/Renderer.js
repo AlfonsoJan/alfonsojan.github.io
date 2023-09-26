@@ -21,7 +21,7 @@ export default class Renderer {
     /**
      * Create a new Renderer instance
      */
-    constructor(birdMesh, initAmount) {
+    constructor(initAmount, color = 0xFFA500, scale = 1.5 ) {
         this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100000 );
         this.camera.position.z = 1000;
         this.scene = new THREE.Scene();
@@ -37,16 +37,18 @@ export default class Renderer {
         this.dier = "vis"
 
         this.initAmount = initAmount
+        this.color = color
+        this.scale = scale
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.boidsController = new BoidsController(this.boundary, 1, this);
         this.boidsController.init();
-        this.birdMesh = birdMesh;
+        
     }
 
 
-    hello(e) {
+    removeBoidsScene(e) {
         this.scene.children
         .filter((obj) => obj.isEntity)
         .forEach(i => {
@@ -62,15 +64,19 @@ export default class Renderer {
         // Create invisible boundary
         this.wireframe = new WireFrame(this.boundary, {color: 0x000000});
         this.wireframe.render(this.scene);
-        this.color = 0xFFA500
+        
 
 
-        this.entityGeometry = createFishGeometry();
-        this.entityMaterial = createFishMaterial(this.color);
-        let fishSize = new THREE.Box3().setFromBufferAttribute(this.entityGeometry.attributes.position);
-        this.entityMaterial.userData.uniforms.totalLength.value = fishSize.max.x;
+        this.fishEntityGeometry = createFishGeometry();
+        this.fishEntityMaterial = createFishMaterial(this.color);
+        let fishSize = new THREE.Box3().setFromBufferAttribute(this.fishEntityGeometry.attributes.position);
+        this.fishEntityMaterial.userData.uniforms.totalLength.value = fishSize.max.x;
 
-        this.fishMesh = new THREE.Mesh(this.entityGeometry, this.entityMaterial);
+        this.fishMesh = new THREE.Mesh(this.fishEntityGeometry, this.fishEntityMaterial);
+
+        this.entityGeometry = new THREE.ConeGeometry(3, 13, 6);
+        this.entityMaterial = new THREE.MeshBasicMaterial({ color: 0xFFA500});
+        this.coneMesh = new THREE.Mesh(this.entityGeometry, this.entityMaterial);
 
         this.obstacleGeometry = new THREE.SphereGeometry( 50, 15, 15 );
         this.obstacleMaterial = new THREE.MeshNormalMaterial();
@@ -191,29 +197,17 @@ export default class Renderer {
             let mesh = entity.mesh;
             // // EVERY FIRST TIME AND BOID IS ADDED THEN IT WILL NOT HAVE AN MESH
             if (!mesh) {
-                if (this.dier === 'vogel') {
-                    mesh = this.birdMesh.clone()
-                }
-                else if (this.dier === 'vis') {
+                if (this.dier === 'vis') {
                     mesh = this.fishMesh.clone()
-                    mesh.scale.set(2, 2, 2)
+                    mesh.scale.set(this.scale, this.scale, this.scale)
+                } else {
+                    console.log("Nu")
+                    mesh = this.coneMesh.clone()
                 }
-                //mesh = this.birdMesh.clone()
                 mesh.localVelocity = {x: 0, y: 0, z: 0};
                 mesh.isEntity = true;
                 this.scene.add(mesh);
                 entity.mesh = mesh;
-            }
-
-            if (this.dier === 'vogel') {
-                mesh.rotateZ(THREE.Math.degToRad(-45));
-                mesh.rotateY(THREE.Math.degToRad(180));
-                mesh.rotateX(THREE.Math.degToRad(90));
-            }
-            else if (this.dier === 'vis') {
-                mesh.rotateZ(THREE.Math.degToRad(45));
-                mesh.rotateY(THREE.Math.degToRad(90));
-                mesh.rotateX(THREE.Math.degToRad(90));
             }
 
             // Apply asymptotic smoothing
@@ -228,6 +222,14 @@ export default class Renderer {
                 mesh.position.y + mesh.localVelocity.y,
                 mesh.position.z + mesh.localVelocity.z
             );
+
+            if (this.dier === 'vis') {
+                mesh.rotateY(THREE.Math.degToRad(90)); 
+                mesh.rotateX(THREE.Math.degToRad(-45));
+            } else {
+                
+                mesh.rotateX(THREE.Math.degToRad(90));
+            }
         });
 
         const obstacles = this.boidsController.getObstacleEntities();
