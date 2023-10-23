@@ -21,7 +21,7 @@ export default class Renderer {
     /**
      * Create a new Renderer instance
      */
-    constructor(initAmount, color = 0xFFA500, scale = 1.5 ) {
+    constructor(initAmount, cursor, color = 0xFFA500, scale = 1.5 ) {
         this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100000 );
         this.camera.position.z = 1000;
         this.scene = new THREE.Scene();
@@ -44,17 +44,9 @@ export default class Renderer {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.boidsController = new BoidsController(this.boundary, 1, this);
         this.boidsController.init();
+
+        this.cursor = cursor;
         
-    }
-
-
-    removeBoidsScene(e) {
-        this.scene.children
-        .filter((obj) => obj.isEntity)
-        .forEach(i => {
-            this.scene.remove(i)
-        })
-        this.boidsController.addBoids(this.initAmount)
     }
 
     /**
@@ -86,9 +78,6 @@ export default class Renderer {
 
         this.renderer.domElement.addEventListener('mousemove', this.onMouseMove.bind(this));
         this.renderer.domElement.addEventListener('mouseout', this.onMouseOut.bind(this));
-
-        this.cursor = document.querySelector('.custom-cursor');
-        this.cursor.style.display = 'none'
         this.updateCamera();
     }
 

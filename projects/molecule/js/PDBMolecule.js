@@ -33,9 +33,9 @@ const atomInfo = {
 };
 
 export default class PDBMolecule {
-    constructor(e, scene) {
-        this.scene = scene
+    constructor(e) {
         this.atoms = []
+        this.meshes = undefined
         this.#parsePdb(e.target.result.split("\n"))
         this.#centerOfMass()
         this.#renderMolecule()
@@ -141,12 +141,5 @@ export default class PDBMolecule {
 
         // Create the mesh
         this.mesh = new THREE.Mesh(mergedGeometry, material);
-        this.scene.add(this.mesh);
-
-        const ambientLight = new THREE.AmbientLight(0x101010);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-        directionalLight.position.set(1, 1, 1).normalize();
-        this.scene.add(ambientLight);
-        this.scene.add(directionalLight);
     }
 }

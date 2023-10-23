@@ -10,10 +10,12 @@ class App {
         this.obstacleEntityCount = 0;
         this.color = 0xFFA509;
         this.scale = 1.5
+        this.cursor = document.querySelector('.custom-cursor');
+        this.cursor.style.display = 'none'
     }
 
     init() {
-        this.renderer = new Renderer(this.flockEntityCount, this.color, this.scale);
+        this.renderer = new Renderer(this.flockEntityCount, this.cursor, this.color, this.scale);
         this.renderer.init();
         this.boidsController = this.renderer.boidsController,
         this.boidsController.addBoids(this.flockEntityCount)
@@ -30,6 +32,7 @@ class App {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    
     let app = new App()
     app.init()
 });

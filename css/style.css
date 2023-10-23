@@ -55,9 +55,9 @@ input, button, textarea, select {
 }
 
 body {
-  background-color: rgb(17 24 39);
+  background-color: rgb(241, 241, 241);
   position: relative;
-  padding-bottom: 200px;
+  padding-bottom: 175px;
   min-height: 100vh;
   color: white;
   font-family: 'Roboto Mono', monospace;
@@ -65,4 +65,9 @@ body {
 
 #model-succes, #model-error {
   transform: translate(-50%, -50%);
+}
+
+svg {
+  width: 20px;
+  height: 20px;
 }

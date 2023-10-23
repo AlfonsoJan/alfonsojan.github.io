@@ -10,327 +10,138 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/public/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/public/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/public/images/favicon-16x16.png">
-    <link href="/css/flowbite.min.css" rel="stylesheet"/>
     <link href="/css/style.css" rel="stylesheet"/>
+    <link href="/css/flowbite.min.css" rel="stylesheet"/>
 </head>
 <body>
-    <nav class="border-gray-200 bg-gray-900">
+    <nav class="" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3)">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="/" class="flex items-center">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white hover:text-gray-500">Portfolio</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-black hover:text-gray-500">Portfolio</span>
             </a>
             <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-hamburger">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0  md:bg-gray-900 border-gray-700">
-                    <li><a href="/" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-white hover:bg-[#FFA151] bg-[#FF7300]" aria-current="page">Home</a></li>
-                    <li><a href="/cv" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-white hover:bg-[#FFA151] bg-[#FF7300]" aria-current="page">CV</a></li>
-                    <li><a href="/projects" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-white hover:bg-[#FFA151] bg-[#FF7300] activeButton" aria-current="page">Project</a></li>
-                    <li><a href="/contact" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-white hover:bg-[#FFA151] bg-[#FF7300]" aria-current="page">Contact</a></li>
-                </ul>
+              <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 bg-orange-200 md:bg-transparent md:border-0 border-gray-700">
+                <li><a href="/" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-black md:bg-orange-200 hover:bg-orange-300" aria-current="page">Home</a></li>
+                <li><a href="/projects" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-black md:bg-orange-200 hover:bg-orange-300">Projects</a></li>
+                <li><a href="/contact" class="block py-2 pl-3 pr-4 mt-1 md:mt-0 rounded md:border-0 md:py-1 md:px-4 text-black md:bg-orange-200 hover:bg-orange-300">Contact</a></li>
+              </ul>
             </div>
         </div>
     </nav>
     <div class="container mx-auto my-10 px-1">
         <div class="p-6 mx-auto">
-            <h2 class="text-4xl tracking-tight font-extrabold text-center text-white">My Projects</h2>
-            <h5 class="mb-4 text-xl font-medium text-white text-center">That I created over the years</h5>
+            <h2 class="text-4xl tracking-tight font-extrabold text-center text-black">My Projects</h2>
+            <h5 class="mb-4 text-xl font-medium text-black text-center">Here are my projects that I've been working on</h5>
         </div>
         <div class="grid grid-cols-3 gap-x-4 md:w-7/12 mx-auto px-1 gap-y-20">
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Minor Application Design</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    A website where protein structures are looked at in a different way. Using PCA on the coordinates of the backbone. And being able to compare these results with a standardisation.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Java</p>
+            <div class="bg-gray-100 col-span-3 p-2 rounded-lg shadow">
+                <h2 class="text-lg font-bold text-black">Molecule Viewer</h2>
+                <hr class="mb-6 mt-2 sm:mx-auto border-gray-300 lg:mb-8 lg:mt-1" />
+                <p class="text-base leading-relaxed text-black">An interactive boids simulation targeted for 12-14 years old.</p>
+                <p class="pt-2 text-black">Tools used for this project:</p>
+                <div class="grid grid-cols-6 md:grid-cols-12 gap-4 mx-auto p-1 text-black">
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Javascript
                     </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Springboot</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Python</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Numpy</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Javascript</p>
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Three.js
                     </div>
                 </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
+                <ul class="flex flex-wrap gap-5 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
                     <li>
-                        <a href="https://github.com/AlfonsoJan/Peptidomics" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        <a href="https://github.com/AlfonsoJan/alfonsojan.github.io/tree/main/projects/molecule" class="inline-flex items-center justify-center px-2 py-2 text-base font-medium rounded-lg text-black bg-gray-200 hover:bg-gray-300 hover:text-black">
+                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="black" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
                             <span class="w-full">Github Link</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
+                        <a href="/projects/molecule" class="inline-flex items-center justify-center px-2 py-2 text-base font-medium rounded-lg text-black bg-gray-200 hover:bg-gray-300 hover:text-black">
+                            Live Demo
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Website/Webapplication</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    Next Generation Sequencing web application. Where Hanze lab technicians can manage their sequencing results and perform small simple analyses on these results.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Java</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Javascript</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>FastQC</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>MySQL</p>
+            <div class="bg-gray-100 col-span-3 p-2 rounded-lg shadow">
+                <h2 class="text-lg font-bold text-black">Interactive Boids Simulation</h2>
+                <hr class="mb-6 mt-2 sm:mx-auto border-gray-300 lg:mb-8 lg:mt-1" />
+                <p class="text-base leading-relaxed text-black">An interactive boids simulation targeted for 12-14 years old.</p>
+                <p class="pt-2 text-black">Tools used for this project:</p>
+                <div class="grid grid-cols-6 md:grid-cols-12 gap-4 mx-auto p-1 text-black">
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Javascript
                     </div>
                 </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
+                <ul class="flex flex-wrap gap-5 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
                     <li>
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        <a href="https://github.com/AlfonsoJan/alfonsojan.github.io/tree/main/projects/boids" class="inline-flex items-center justify-center px-2 py-2 text-base font-medium rounded-lg text-black bg-gray-200 hover:bg-gray-300 hover:text-black">
+                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="black" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
                             <span class="w-full">Github Link</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
+                        <a href="/projects/boids" class="inline-flex items-center justify-center px-2 py-2 text-base font-medium rounded-lg text-black bg-gray-200 hover:bg-gray-300 hover:text-black">
+                            Live Demo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/projects/boids/src/images/poster.pdf" class="inline-flex items-center justify-center px-2 py-2 text-base font-medium rounded-lg text-black bg-gray-200 hover:bg-gray-300 hover:text-black">
+                            Poster
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Diagnostic Genome Analysis</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    Performed genetic testing based on raw next-generation sequencing data. To uncover and classify genomic variations.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Python</p>
+            <div class="bg-gray-100 col-span-3 p-2 rounded-lg shadow">
+                <h2 class="text-lg font-bold text-black">Minor Application Design</h2>
+                <hr class="mb-6 mt-2 sm:mx-auto border-gray-300 lg:mb-8 lg:mt-1" />
+                <p class="text-base leading-relaxed text-black">A website where protein structures are looked at in a different way. Using PCA on the internal distances of the backbone. And being able to compare these results with a standardisation.</p>
+                <p class="pt-2 text-black">Tools used for this project:</p>
+                <div class="grid grid-cols-6 md:grid-cols-12 gap-4 mx-auto p-1 text-black">
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Java
                     </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>MariaDB</p>
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Springboot
                     </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Galaxy</p>
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Python
                     </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>SQL</p>
-                    </div> 
-                </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
-                    <li>
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-                            <span class="w-full">Github Link</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Python Pipeline / Snakemake</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    The purpose of this project was to modify/rewrite an existing alignment pipeline to get feedback on what, if any, is wrong with the data. And this was rewritten to a Snakemake file.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Python</p>
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Numpy
                     </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Snakemake</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Hisat2</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>QualiMap</p>
+                    <div class="col-span-3 md:col-span-4 lg:col-span-3 flex justify-center flex-col items-center rounded-lg bg-orange-100">
+                        Javascript
                     </div>
                 </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
+                <ul class="flex flex-wrap gap-5 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
                     <li>
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        <a href="https://github.com/AlfonsoJan/Peptidomics" class="inline-flex items-center justify-center px-2 py-2 text-base font-medium rounded-lg text-black bg-gray-200 hover:bg-gray-300 hover:text-black">
+                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="black" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
                             <span class="w-full">Github Link</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
-                        </a>
-                    </li>
-                </ul>
-            </div>         
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Gene expression analysis</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    Learned the entire process of analysing a dataset of gene expression data measured by the RNA sequencing technique.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>R</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>GGplot2</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>DESeq1</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>edgeR</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>pheatmap</p>
-                    </div>
-                </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
-                    <li>
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-                            <span class="w-full">Github Link</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Modelling biological systems</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    Developing mathematical tools that allow a complete description of the CRC circuit. Using 2 different articles with different models.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>R</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>deSolve</p>
-                    </div>
-                </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
-                    <li>
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-                            <span class="w-full">Github Link</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Integrating a Flask website and a Dash dashboard</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    Successfully integrated Plotly Dash into my Flask app with a clever workaround. To build interactive Plotly Dash interfaces into my Flask applications.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Python</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Flask</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Dash</p>
-                    </div>
-                </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
-                    <li>
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-                            <span class="w-full">Github Link</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-gray-800 col-span-3 p-2 rounded-lg">
-                <h2 class="text-lg font-bold text-white">Machine Learning on yeast data</h2>
-                <hr class="mb-6 mt-2 sm:mx-auto border-gray-700 lg:mb-8 lg:mt-1" />
-                <p class="text-base leading-relaxed text-white">
-                    Successful characterisation of a simple classification model. That will predict protein localisations at cellular sites with 68% certainty. WIth a Weka CLI tool.
-                </p>
-                <p class="pt-2">Tools used for this project:</p>
-                <div class="grid grid-cols-4 pt-1 text-center">
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Java</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>Weka</p>
-                    </div>
-                    <div class="bg-gray-700 col-span-1 py-2">
-                        <p>R</p>
-                    </div>
-                </div>
-                <ul class="flex flex-wrap gap-10 items-center my-6 text-sm font-medium sm:mb-0 text-gray-400">
-                    <li>
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            <svg aria-hidden="true" class="mr-3" height="24" version="1.1" fill="white" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-                            <span class="w-full">Github Link</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/projects/minor" class="inline-flex items-center justify-center px-5 py-2 text-base font-medium rounded-lg text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white">
-                            Read more
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <footer class="rounded-lg shadow bg-gray-900 md:bg-gray-900 mt-4 absolute bottom-0 w-full">
+    <footer class="mt-4 absolute bottom-0 w-full">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a href="/" class="flex items-center mb-4 sm:mb-0">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white hover:text-gray-500">Jan Alfonso Busker</span>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-black hover:text-gray-500">Jan Alfonso Busker</span>
                 </a>
-                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 text-gray-400">
+                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 text-gray-700">
                     <li><a href="/" class="mr-4 hover:underline md:mr-6">Home</a></li>
-                    <li><a href="/cv" class="mr-4 hover:underline md:mr-6">CV</a></li>
-                    <li><a href="/projects" class="mr-4 hover:underline md:mr-6">Project</a></li>
+                    <li><a href="/projects" class="mr-4 hover:underline md:mr-6">Projects</a></li>
                     <li><a href="/contact" class="mr-4 hover:underline md:mr-6">Contact</a></li>
                 </ul>
             </div>
             <hr class="my-6 sm:mx-auto border-gray-700 lg:my-8" />
-            <span class="block text-sm sm:text-center text-gray-400"><a href="/" class="hover:underline">Jan Alfonso Busker</a> © 2023 All Rights Reserved.</span>
+            <span class="block text-sm sm:text-center text-gray-700"><a href="/" class="hover:underline">Jan Alfonso Busker</a> © 2023 All Rights Reserved.</span>
         </div>
-    </footer>
+    </footer> 
 </body>
 </html>
